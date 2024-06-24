@@ -39,7 +39,6 @@ const Header = () => {
           </Link>
           <Navbar.Toggle />
           </div>
-
        <Navbar.Collapse>
         <Navbar.Link active={path==='/'} as={'div'}>
             <Link to='/'>Home</Link>
