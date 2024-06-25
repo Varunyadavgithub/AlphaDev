@@ -25,6 +25,9 @@ const FooterComp = () => {
                 </span>
                 Dev
               </Link>
+              {/* <div className="p-5">
+                <p>Flowbite is an ecosystem built on top of Tailwind CSS including a component library, block sections, a Figma design system and other resources.</p>
+              </div> */}
             </div>
             <div className="grid grid-cols-2 gap-8 mt-4 sm:grid-cols-3 sm:gap-6">
               <div>
