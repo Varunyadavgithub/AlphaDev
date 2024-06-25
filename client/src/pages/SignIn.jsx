@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link,useNavigate } from "react-router-dom";
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 
-const SignUp = () => {
+const SignIn = () => {
   const [formData,setFormData]=useState({});
   const [errorMessage,setErrorMessage]=useState(null);
   const [loading,setLoading]=useState(false);
@@ -13,13 +13,13 @@ const SignUp = () => {
   }
   const handleSubmit=async (e)=>{
     e.preventDefault();
-    if(!formData.username || !formData.email || !formData.password){
+    if(!formData.email || !formData.password){
       return setErrorMessage("Please fill out all fields.");
     }
     try {
       setLoading(true);
       setErrorMessage(null);
-      const res=await fetch('/api/v1/auth/signup',{
+      const res=await fetch('/api/v1/auth/signin',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify(formData),
@@ -30,7 +30,7 @@ const SignUp = () => {
       }
       setLoading(false);
       if(res.ok){
-        navigate('/signin')
+        navigate('/')
       }
     } catch (error) {
       setErrorMessage(error.message);
@@ -50,7 +50,7 @@ const SignUp = () => {
               Dev
             </Link>
             <p className="text-sm mt-5 font-semibold">
-              Welcome to AlphaDev. You can sign up with your email and password
+              Welcome to AlphaDev. You can sign in with your email and password
               or with Google.
             </p>
           </div>
@@ -90,7 +90,7 @@ const SignUp = () => {
             <div className="flex gap-2 text-sm mt-2">
               <span className="font-semibold">Don't have an account?</span>
               <Link
-                to="/signin"
+                to="/signup"
                 className="font-semibold underline text-blue-600"
               >
                 Sign Up
@@ -108,4 +108,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;
