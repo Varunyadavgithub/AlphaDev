@@ -83,7 +83,8 @@ const FooterComp = () => {
           </div>
           <Footer.Divider />
           <div className="w-full sm:flex sm:items-center sm:justify-between">
-            <Footer.Copyright href="/" by="AlphaDev" year={new Date().getFullYear()} />
+            <p>Copyright &#169; {new Date().getFullYear()} AlphaDev.com</p>
+            {/* <Footer.Copyright href="/" by="AlphaDev" year={new Date().getFullYear()} /> */}
             <div className="mt-4 flex gap-6 sm:mt-0 sm:justify-center">
               <Footer.Icon href="https://x.com/varun_yadav01" target="_blank" rel="noopener noreferrer" icon={BsTwitter} />
               <Footer.Icon href="https://github.com/Varunyadavgithub" target="_blank" rel="noopener noreferrer" icon={BsGithub} />
