@@ -3,11 +3,17 @@ import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 import { Link, useLocation } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { LuSun } from "react-icons/lu";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleTheme } from "../redux/theme/themeSlice";
+import { RxDashboard } from "react-icons/rx";
+import { PiSignOut } from "react-icons/pi";
 
 const Header = () => {
   const path = useLocation().pathname;
-  const { currentUser } = useSelector(state => state.user);
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.user);
+  const { theme } = useSelector((state) => state.theme);
 
   return (
     <>
@@ -34,8 +40,13 @@ const Header = () => {
         </Button>
 
         <div className="flex gap-4 md:order-2">
-          <Button className="w-10 h-9" color="gray" pill>
-            <FaMoon />
+          <Button
+            className="w-10 h-9"
+            color="gray"
+            pill
+            onClick={() => dispatch(toggleTheme())}
+          >
+            {theme === "light" ? <FaMoon /> : <LuSun />}
           </Button>
           {currentUser ? (
             <Dropdown
@@ -45,7 +56,7 @@ const Header = () => {
                 <Avatar alt="user" img={currentUser.profilePicture} rounded />
               }
             >
-              <Dropdown.Header>
+              <Dropdown.Header className="hover:cursor-default">
                 <span className="block text-sm font-bold text-center">
                   {currentUser.username}
                 </span>
@@ -54,10 +65,10 @@ const Header = () => {
                 </span>
               </Dropdown.Header>
               <Link to={"/dashboard?tab=profile"}>
-                <Dropdown.Item>Profile</Dropdown.Item>
+                <Dropdown.Item icon={RxDashboard}>Profile</Dropdown.Item>
               </Link>
               <Dropdown.Divider />
-              <Dropdown.Item>Sign Out</Dropdown.Item>
+              <Dropdown.Item icon={PiSignOut}>Sign Out</Dropdown.Item>
             </Dropdown>
           ) : (
             <Link to="/signin">
