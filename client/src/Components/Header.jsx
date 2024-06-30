@@ -8,12 +8,29 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice";
 import { RxDashboard } from "react-icons/rx";
 import { PiSignOut } from "react-icons/pi";
+import {signoutSuccess} from "../redux/user/userSlice";
 
 const Header = () => {
   const path = useLocation().pathname;
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
   const { theme } = useSelector((state) => state.theme);
+
+  const handleSignout=async ()=>{
+    try {
+      const res=await fetch('/api/v1/user/signout',{
+        method:'POST',
+      });
+      const data=await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      }else{
+        dispatch(signoutSuccess())
+      }
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
 
   return (
     <>
@@ -68,7 +85,7 @@ const Header = () => {
                 <Dropdown.Item icon={RxDashboard}>Profile</Dropdown.Item>
               </Link>
               <Dropdown.Divider />
-              <Dropdown.Item icon={PiSignOut}>Sign Out</Dropdown.Item>
+              <Dropdown.Item icon={PiSignOut} onClick={handleSignout}>Sign Out</Dropdown.Item>
             </Dropdown>
           ) : (
             <Link to="/signin">
