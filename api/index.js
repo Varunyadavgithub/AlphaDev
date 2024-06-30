@@ -3,6 +3,7 @@ import  dotenv from "dotenv";
 import dbConnection from "./config/db.js";
 import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 dotenv.config();
@@ -14,6 +15,7 @@ app.use(express.urlencoded({
     extended:true
 }));
 app.use(express.json());
+app.use(cookieParser());
 
 
 app.listen(process.env.PORT, () => {
