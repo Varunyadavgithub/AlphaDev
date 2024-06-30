@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 const DashSidebar = () => {
   const location = useLocation();
   const [tab, setTab] = useState();
+  const dispatch=useDispatch();
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -37,7 +38,7 @@ const DashSidebar = () => {
     <>
       <Sidebar className="w-full md:w-56">
         <Sidebar.Items>
-          <Sidebar.ItemGroup>
+          <Sidebar.ItemGroup className="cursor-pointer">
             <Link to="/dashboard?tab=profile">
               <Sidebar.Item
                 active={tab === "profile"}
