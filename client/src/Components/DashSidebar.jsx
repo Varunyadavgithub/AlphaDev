@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Sidebar } from "flowbite-react";
 import { FaRegUser } from "react-icons/fa6";
-import { LiaSignOutAltSolid } from "react-icons/lia";
+import { PiSignOut } from "react-icons/pi";
 import { Link, useLocation } from "react-router-dom";
 
 const DashSidebar = () => {
@@ -26,11 +26,12 @@ const DashSidebar = () => {
                 icon={FaRegUser}
                 label={"User"}
                 labelColor="dark"
+                as="div"
               >
                 Profile
               </Sidebar.Item>
             </Link>
-            <Sidebar.Item icon={LiaSignOutAltSolid}>Sign Out</Sidebar.Item>
+            <Sidebar.Item icon={PiSignOut}>Sign Out</Sidebar.Item>
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar>

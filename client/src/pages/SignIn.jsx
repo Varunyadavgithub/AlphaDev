@@ -1,44 +1,50 @@
 import React, { useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
-import {useDispatch, useSelector} from "react-redux";
-import { signInStart,signInFailure,signInSuccess } from "../redux/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInStart,
+  signInFailure,
+  signInSuccess,
+} from "../redux/user/userSlice";
 import OAuth from "../Components/OAuth";
+import { BiError } from "react-icons/bi";
+
 
 const SignIn = () => {
-  const [formData,setFormData]=useState({});
-  const{loading,error:errorMessage}=useSelector(store=>store.user);
-  const navigate=useNavigate();
-  const dispatch=useDispatch();
-  
-  const handleChange=(e)=>{
-    setFormData({ ...formData,[e.target.id]:e.target.value.trim()});
-  }
+  const [formData, setFormData] = useState({});
+  const { loading, error: errorMessage } = useSelector((store) => store.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleSubmit=async (e)=>{
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!formData.email || !formData.password){
+    if (!formData.email || !formData.password) {
       return dispatch(signInFailure("Please fill out all fields."));
     }
     try {
       dispatch(signInStart());
-      const res=await fetch('/api/v1/auth/signin',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify(formData),
+      const res = await fetch("/api/v1/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
-      const data=await res.json();
-      if(data.success === false){
-        dispatch(signInFailure(error.message));
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(signInFailure(data.message));
       }
-      if(res.ok){
+      if (res.ok) {
         dispatch(signInSuccess(data));
-        navigate('/')
+        navigate("/");
       }
     } catch (error) {
       dispatch(signInFailure(error.message));
     }
-  }
+  };
   return (
     <>
       <div className="my-20">
@@ -78,17 +84,21 @@ const SignIn = () => {
                   onChange={handleChange}
                 />
               </div>
-              <Button type='submit' gradientDuoTone="purpleToBlue" disabled={loading}>
-                {
-                  loading ? (
-                    <>
-                    <Spinner size='sm'/>
+              <Button
+                type="submit"
+                gradientDuoTone="purpleToBlue"
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <Spinner size="sm" />
                     <span className="pl-3">Loading...</span>
-                    </>
-                  ) : 'Sign In'
-                }
+                  </>
+                ) : (
+                  "Sign In"
+                )}
               </Button>
-              <OAuth/>
+              <OAuth />
             </form>
             <div className="flex gap-2 text-sm mt-2">
               <span className="font-semibold">Don't have an account?</span>
@@ -99,11 +109,12 @@ const SignIn = () => {
                 Sign Up
               </Link>
             </div>
-            {
-              errorMessage && (
-                <Alert className="mt-2 font-semibold" color='failure'>{errorMessage}</Alert>
-              )
-            }
+           
+            {errorMessage && ( 
+              <Alert className="mt-2 font-semibold" color="failure" icon={BiError}>
+                {errorMessage}
+              </Alert>
+            )}
           </div>
         </div>
       </div>
