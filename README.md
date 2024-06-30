@@ -20,20 +20,7 @@ Get started with **AlphaDev** in just a few steps:
 2. **Navigate to the directory**: `cd your-repository`
 3. **Install dependencies**: `npm install`
 4. **Launch the development server**: `npm start`
-
-## 🚀 Deployment
-
-Experience the live version of **AlphaDev** on [Render](https://your-app.render.com). Deployed for free to showcase your work to the world!
-
-## 📚 Getting Started
-
-Explore the journey through our comprehensive course:
-
-- **Setup**: Learn to integrate React.js with Tailwind CSS for a polished frontend.
-- **Authentication**: Implement secure user login with JWT and Google OAuth.
-- **Admin Dashboard**: Manage blog content effortlessly with CRUD operations.
-- **Database**: Connect and utilize MongoDB for storing posts, comments, and user data.
-- **Deployment**: Deploy your application on Render with our straightforward guide.
+5. 
 
 ## 🤝 Contributing
 
