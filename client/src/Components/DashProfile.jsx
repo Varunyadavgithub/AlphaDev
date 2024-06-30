@@ -21,9 +21,10 @@ import {
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { MdAutoDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const DashProfile = () => {
-  const { currentUser,error } = useSelector((state) => state.user);
+  const { currentUser, error, loading } = useSelector((state) => state.user);
   const [imageFile, setImageFile] = useState(null);
   const [imageFileUrl, setImageFileUrl] = useState(null);
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
@@ -138,12 +139,12 @@ const DashProfile = () => {
     try {
       dispatch(deleteUserStart());
       const res = await fetch(`/api/v1/user/delete/${currentUser._id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
-      const data=await res.json();
+      const data = await res.json();
       if (!res.ok) {
         dispatch(deleteUserFailure(data.message));
-      }else{
+      } else {
         dispatch(deleteUserSuccess(data));
       }
     } catch (error) {
@@ -151,21 +152,21 @@ const DashProfile = () => {
     }
   };
 
-  const handleSignout=async ()=>{
+  const handleSignout = async () => {
     try {
-      const res=await fetch('/api/v1/user/signout',{
-        method:'POST',
+      const res = await fetch("/api/v1/user/signout", {
+        method: "POST",
       });
-      const data=await res.json();
+      const data = await res.json();
       if (!res.ok) {
         console.log(data.message);
-      }else{
-        dispatch(signoutSuccess())
+      } else {
+        dispatch(signoutSuccess());
       }
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
-  }
+  };
   return (
     <>
       <div className="max-w-lg mx-auto p-3 w-full">
@@ -247,9 +248,19 @@ const DashProfile = () => {
             type="submit"
             gradientDuoTone="purpleToBlue"
             className="my-2 text-xs"
+            disabled={loading || imageFileUploading}
           >
-            Update
+            {loading ? "loading...." : "Update"}
           </Button>
+          {currentUser.isAdmin && (
+            <>
+              <Link to={"/create-post"}>
+                <Button type="button" gradientDuoTone="purpleToPink" outline className="w-full">
+                  Create a post
+                </Button>
+              </Link>
+            </>
+          )}
         </form>
         <div className="text-red-500 flex justify-between mt-3">
           <span
@@ -258,7 +269,12 @@ const DashProfile = () => {
           >
             Delete Account
           </span>
-          <span onClick={handleSignout} className="cursor-pointer hover:underline">Sign Out</span>
+          <span
+            onClick={handleSignout}
+            className="cursor-pointer hover:underline"
+          >
+            Sign Out
+          </span>
         </div>
         {updateUserSuccess && (
           <Alert color="success" className="mt-3">
@@ -271,9 +287,9 @@ const DashProfile = () => {
           </Alert>
         )}
         {error && (
-           <Alert color="failure" className="mt-3">
-           {error}
-         </Alert>
+          <Alert color="failure" className="mt-3">
+            {error}
+          </Alert>
         )}
         <Modal
           show={showModal}
