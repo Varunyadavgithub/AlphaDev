@@ -17,7 +17,7 @@ This dynamic MERN stack application combines the power of **React.js**, **Tailwi
 Get started with **AlphaDev** in just a few steps:
 
 1. **Clone the repository**: `git clone https://github.com/Varunyadavgithub/AlphaDev.git`
-2. **Navigate to the directory**: `cd your-repository`
+2. **Navigate to the directory**: `cd client`
 3. **Install dependencies**: `npm install`
 4. **Launch the development server**: `npm start`
 5. 
