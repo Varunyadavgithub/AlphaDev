@@ -3,6 +3,7 @@ import  dotenv from "dotenv";
 import dbConnection from "./config/db.js";
 import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
+import postRoutes from  "./routes/post.route.js";
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -25,6 +26,7 @@ app.listen(process.env.PORT, () => {
 // routes (APIs)
 app.use('/api/v1/user',userRoutes);
 app.use('/api/v1/auth',authRoutes);
+app.use('/api/v1/post',postRoutes);
 
 // Middleware to handle the error
 app.use((err,req,res,next)=>{
