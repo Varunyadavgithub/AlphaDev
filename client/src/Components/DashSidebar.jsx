@@ -5,11 +5,14 @@ import { PiSignOut } from "react-icons/pi";
 import { Link, useLocation } from "react-router-dom";
 import { signoutSuccess } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
+import { CiSquarePlus } from "react-icons/ci";
+import { useSelector } from "react-redux";
 
 const DashSidebar = () => {
   const location = useLocation();
   const [tab, setTab] = useState();
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
+  const {currentUser} = useSelector((state) => state.user);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -19,38 +22,51 @@ const DashSidebar = () => {
     }
   }, [location.search]);
 
-  const handleSignout=async ()=>{
+  const handleSignout = async () => {
     try {
-      const res=await fetch('/api/v1/user/signout',{
-        method:'POST',
+      const res = await fetch("/api/v1/user/signout", {
+        method: "POST",
       });
-      const data=await res.json();
+      const data = await res.json();
       if (!res.ok) {
         console.log(data.message);
-      }else{
-        dispatch(signoutSuccess())
+      } else {
+        dispatch(signoutSuccess());
       }
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
-  }
+  };
   return (
     <>
       <Sidebar className="w-full md:w-56">
         <Sidebar.Items>
-          <Sidebar.ItemGroup className="cursor-pointer">
+          <Sidebar.ItemGroup className="flex flex-col gap-1 cursor-pointer">
             <Link to="/dashboard?tab=profile">
               <Sidebar.Item
                 active={tab === "profile"}
                 icon={FaRegUser}
-                label={"User"}
+                label={currentUser.isAdmin?"Admin":"User"}
                 labelColor="dark"
                 as="div"
               >
                 Profile
               </Sidebar.Item>
             </Link>
-            <Sidebar.Item icon={PiSignOut} onClick={handleSignout}>Sign Out</Sidebar.Item>
+            {currentUser.isAdmin && (
+              <Link to="/dashboard?tab=posts">
+                <Sidebar.Item
+                  active={tab === "posts"}
+                  icon={CiSquarePlus}
+                  as="div"
+                >
+                  Posts
+                </Sidebar.Item>
+              </Link>
+            )}
+            <Sidebar.Item icon={PiSignOut} onClick={handleSignout}>
+              Sign Out
+            </Sidebar.Item>
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar>
