@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Sidebar } from "flowbite-react";
-import { FaRegUser } from "react-icons/fa6";
+import { FaUserLarge } from "react-icons/fa6";
 import { PiSignOut } from "react-icons/pi";
 import { Link, useLocation } from "react-router-dom";
 import { signoutSuccess } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { CiSquarePlus } from "react-icons/ci";
 import { useSelector } from "react-redux";
+import { FaUsers } from "react-icons/fa";
+
 
 const DashSidebar = () => {
   const location = useLocation();
@@ -45,7 +47,7 @@ const DashSidebar = () => {
             <Link to="/dashboard?tab=profile">
               <Sidebar.Item
                 active={tab === "profile"}
-                icon={FaRegUser}
+                icon={FaUserLarge}
                 label={currentUser.isAdmin?"Admin":"User"}
                 labelColor="dark"
                 as="div"
@@ -61,6 +63,17 @@ const DashSidebar = () => {
                   as="div"
                 >
                   Posts
+                </Sidebar.Item>
+              </Link>
+            )}
+             {currentUser.isAdmin && (
+              <Link to="/dashboard?tab=users">
+                <Sidebar.Item
+                  active={tab === "users"}
+                  icon={FaUsers}
+                  as="div"
+                >
+                  Users
                 </Sidebar.Item>
               </Link>
             )}
