@@ -16,7 +16,7 @@ const postSchema = new mongoose.Schema(
             unique:true,
         },
         image:{
-            type:String,
+            type:String, 
             default:"https://cdn.pixabay.com/photo/2018/05/08/15/28/blog-3383287_1280.jpg",
         },
         category:{

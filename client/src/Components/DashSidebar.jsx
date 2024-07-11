@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { CiSquarePlus } from "react-icons/ci";
 import { useSelector } from "react-redux";
 import { FaUsers } from "react-icons/fa";
+import { FaRegComment } from "react-icons/fa";
 
 
 const DashSidebar = () => {
@@ -56,6 +57,7 @@ const DashSidebar = () => {
               </Sidebar.Item>
             </Link>
             {currentUser.isAdmin && (
+              <>
               <Link to="/dashboard?tab=posts">
                 <Sidebar.Item
                   active={tab === "posts"}
@@ -65,6 +67,17 @@ const DashSidebar = () => {
                   Posts
                 </Sidebar.Item>
               </Link>
+
+              <Link to="/dashboard?tab=comments">
+                <Sidebar.Item
+                  active={tab === "comments"}
+                  icon={FaRegComment}
+                  as="div"
+                >
+                  Comments
+                </Sidebar.Item>
+              </Link>
+              </>
             )}
              {currentUser.isAdmin && (
               <Link to="/dashboard?tab=users">

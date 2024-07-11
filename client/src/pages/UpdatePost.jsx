@@ -19,6 +19,7 @@ const UpdatePost = () => {
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({});
+  console.log(formData);
   const [publishError, setPublishError] = useState(null);
   const navigate = useNavigate();
   const { postId } = useParams();
@@ -79,17 +80,16 @@ const UpdatePost = () => {
     } catch (error) {
       setImageUploadError("Image upload failed");
       setImageUploadProgress(null);
-      console.log("done");
+      console.log(error);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(
-        `/api/v1/post/updatepost/${formData._id}/${currentUser._id}`,
+      const res = await fetch(`/api/v1/post/updatepost/${formData._id}/${currentUser._id}`,
         {
-          method: "PUT",
+          method: 'PUT',
           headers: {
             "Content-Type": "application/json",
           },
@@ -136,6 +136,7 @@ const UpdatePost = () => {
               <option value="uncategorized">Select a category</option>
               <option value="javaScript">JavaScript</option>
               <option value="react">React.js</option>
+              <option value="node">Node.js</option>
               <option value="dsa">DSA</option>
               <option value="css">CSS</option>
             </Select>
