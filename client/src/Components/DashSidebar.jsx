@@ -9,13 +9,13 @@ import { CiSquarePlus } from "react-icons/ci";
 import { useSelector } from "react-redux";
 import { FaUsers } from "react-icons/fa";
 import { FaRegComment } from "react-icons/fa";
-
+import { HiChartPie } from "react-icons/hi";
 
 const DashSidebar = () => {
   const location = useLocation();
   const [tab, setTab] = useState();
   const dispatch = useDispatch();
-  const {currentUser} = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -45,11 +45,22 @@ const DashSidebar = () => {
       <Sidebar className="w-full md:w-56">
         <Sidebar.Items>
           <Sidebar.ItemGroup className="flex flex-col gap-1 cursor-pointer">
+            {currentUser && currentUser.isAdmin && (
+              <Link to="/dashboard?tab=dash">
+                <Sidebar.Item
+                  active={tab === "dash" || !tab}
+                  icon={HiChartPie}
+                  as="div"
+                >
+                  Dashboard
+                </Sidebar.Item>
+              </Link>
+            )}
             <Link to="/dashboard?tab=profile">
               <Sidebar.Item
                 active={tab === "profile"}
                 icon={FaUserLarge}
-                label={currentUser.isAdmin?"Admin":"User"}
+                label={currentUser.isAdmin ? "Admin" : "User"}
                 labelColor="dark"
                 as="div"
               >
@@ -58,34 +69,30 @@ const DashSidebar = () => {
             </Link>
             {currentUser.isAdmin && (
               <>
-              <Link to="/dashboard?tab=posts">
-                <Sidebar.Item
-                  active={tab === "posts"}
-                  icon={CiSquarePlus}
-                  as="div"
-                >
-                  Posts
-                </Sidebar.Item>
-              </Link>
+                <Link to="/dashboard?tab=posts">
+                  <Sidebar.Item
+                    active={tab === "posts"}
+                    icon={CiSquarePlus}
+                    as="div"
+                  >
+                    Posts
+                  </Sidebar.Item>
+                </Link>
 
-              <Link to="/dashboard?tab=comments">
-                <Sidebar.Item
-                  active={tab === "comments"}
-                  icon={FaRegComment}
-                  as="div"
-                >
-                  Comments
-                </Sidebar.Item>
-              </Link>
+                <Link to="/dashboard?tab=comments">
+                  <Sidebar.Item
+                    active={tab === "comments"}
+                    icon={FaRegComment}
+                    as="div"
+                  >
+                    Comments
+                  </Sidebar.Item>
+                </Link>
               </>
             )}
-             {currentUser.isAdmin && (
+            {currentUser.isAdmin && (
               <Link to="/dashboard?tab=users">
-                <Sidebar.Item
-                  active={tab === "users"}
-                  icon={FaUsers}
-                  as="div"
-                >
+                <Sidebar.Item active={tab === "users"} icon={FaUsers} as="div">
                   Users
                 </Sidebar.Item>
               </Link>
