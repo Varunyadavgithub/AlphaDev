@@ -21,7 +21,7 @@ const Header = () => {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    const searchTermFromUrl = urlParams.get('searchTerm');
+    const searchTermFromUrl = urlParams.get("searchTerm");
     if (searchTermFromUrl) {
       setSearchTerm(searchTermFromUrl);
     }
@@ -48,9 +48,13 @@ const Header = () => {
     const urlParams = new URLSearchParams(location.search);
     urlParams.set('searchTerm', searchTerm);
     const searchQuery = urlParams.toString();
+    console.log(`Navigating to: /search?${searchQuery}`);
     navigate(`/search?${searchQuery}`);
   };
 
+  const handleSearchIcon=()=>{
+    navigate('/search');
+  }
   return (
     <>
       <Navbar className="border-b-2">
@@ -70,10 +74,10 @@ const Header = () => {
             rightIcon={AiOutlineSearch}
             className="hidden lg:inline"
             value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
         </form>
-        <Button className="w-10 h-9 lg:hidden" color="gray" pill>
+        <Button className="w-10 h-9 lg:hidden" color="gray" pill onClick={handleSearchIcon}>
           <AiOutlineSearch />
         </Button>
 

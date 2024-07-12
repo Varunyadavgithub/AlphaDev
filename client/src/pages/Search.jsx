@@ -17,9 +17,9 @@ const Search = () => {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    const searchTermFromUrl = urlParams.get("searchTerm");
-    const sortFromUrl = urlParams.get("sort");
-    const categoryFromUrl = urlParams.get("category");
+    const searchTermFromUrl = urlParams.get("searchTerm") || "";
+    const sortFromUrl = urlParams.get("sort") || "desc";
+    const categoryFromUrl = urlParams.get("category") || "uncategorized";
     if (searchTermFromUrl || sortFromUrl || categoryFromUrl) {
       setSidebarData({
         ...sidebarData,
@@ -61,7 +61,7 @@ const Search = () => {
     }
     if (e.target.id === "category") {
       const category = e.target.value || "uncategorized";
-      setSidebarData({ ...sidebarData, category: category });
+      setSidebarData({ ...sidebarData, category });
     }
   };
 
@@ -113,7 +113,7 @@ const Search = () => {
               />
             </div>
             <div className="flex items-center gap-2">
-              <lable className="font-semibold">Sort:</lable>
+              <label className="font-semibold">Sort:</label>
               <Select
                 id="sort"
                 value={sidebarData.sort}
@@ -124,7 +124,7 @@ const Search = () => {
               </Select>
             </div>
             <div className="flex items-center gap-2">
-              <lable className="font-semibold">Category:</lable>
+              <label className="font-semibold">Category:</label>
               <Select
                 id="category"
                 value={sidebarData.category}
