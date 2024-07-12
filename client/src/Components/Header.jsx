@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
 import { LuSun } from "react-icons/lu";
@@ -8,29 +8,48 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice";
 import { RxDashboard } from "react-icons/rx";
 import { PiSignOut } from "react-icons/pi";
-import {signoutSuccess} from "../redux/user/userSlice";
+import { signoutSuccess } from "../redux/user/userSlice";
 
 const Header = () => {
   const path = useLocation().pathname;
+  const location = useLocation();
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
   const { theme } = useSelector((state) => state.theme);
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
-  const handleSignout=async ()=>{
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get('searchTerm');
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [location.search]);
+
+  const handleSignout = async () => {
     try {
-      const res=await fetch('/api/v1/user/signout',{
-        method:'POST',
+      const res = await fetch("/api/v1/user/signout", {
+        method: "POST",
       });
-      const data=await res.json();
+      const data = await res.json();
       if (!res.ok) {
         console.log(data.message);
-      }else{
-        dispatch(signoutSuccess())
+      } else {
+        dispatch(signoutSuccess());
       }
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
-  }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set('searchTerm', searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
 
   return (
     <>
@@ -44,12 +63,14 @@ const Header = () => {
           </span>
           Dev
         </Link>
-        <form>
+        <form onSubmit={handleSubmit}>
           <TextInput
             type="text"
             placeholder="Search..."
             rightIcon={AiOutlineSearch}
             className="hidden lg:inline"
+            value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
           />
         </form>
         <Button className="w-10 h-9 lg:hidden" color="gray" pill>
@@ -85,7 +106,9 @@ const Header = () => {
                 <Dropdown.Item icon={RxDashboard}>Profile</Dropdown.Item>
               </Link>
               <Dropdown.Divider />
-              <Dropdown.Item icon={PiSignOut} onClick={handleSignout}>Sign Out</Dropdown.Item>
+              <Dropdown.Item icon={PiSignOut} onClick={handleSignout}>
+                Sign Out
+              </Dropdown.Item>
             </Dropdown>
           ) : (
             <Link to="/signin">

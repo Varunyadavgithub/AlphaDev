@@ -25,7 +25,7 @@ const DashboardComp = () => {
         const res = await fetch("/api/v1/user/getusers?limit=5");
         const data = await res.json();
         if (res.ok) {
-          setUsers(data.user);
+          setUsers(data.users);
           setTotalUsers(data.totalUsers);
           setLastMonthUsers(data.lastMonthUsers);
         }
