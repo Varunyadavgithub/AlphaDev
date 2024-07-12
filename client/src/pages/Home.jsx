@@ -49,7 +49,7 @@ const Home = () => {
             </div>
             <Link
               to="/search"
-              className="text-sm sm:text-xl text-teal-500 font-semibold hover:underline"
+              className="text-sm sm:text-xl text-teal-500 font-semibold hover:underline text-center"
             >
               View all posts
             </Link>
