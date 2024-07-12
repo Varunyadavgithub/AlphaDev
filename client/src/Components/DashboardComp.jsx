@@ -141,24 +141,24 @@ const DashboardComp = () => {
                 <Table.HeadCell>Username</Table.HeadCell>
               </Table.Head>
               {users &&
-              users.map((user) => (
-                <Table.Body key={user._id} className='divide-y'>
-                  <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                    <Table.Cell>
-                      <img
-                        src={user.profilePicture}
-                        alt='user'
-                        className='w-10 h-10 rounded-full bg-gray-500'
-                      />
-                    </Table.Cell>
-                    <Table.Cell>{user.username}</Table.Cell>
-                  </Table.Row>
-                </Table.Body>
-              ))}
+                users.map((user) => (
+                  <Table.Body key={user._id} className="divide-y">
+                    <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <Table.Cell>
+                        <img
+                          src={user.profilePicture}
+                          alt="user"
+                          className="w-10 h-10 rounded-full bg-gray-500"
+                        />
+                      </Table.Cell>
+                      <Table.Cell>{user.username}</Table.Cell>
+                    </Table.Row>
+                  </Table.Body>
+                ))}
             </Table>
           </div>
           {/* Posts */}
-          <div className="flex flex-col w-full md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800">
+          <div className="flex flex-col w-full md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800 overflow-x-scroll scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500 md:scrollbar-none">
             <div className="flex justify-between p-3 text-sm font-semibold">
               <h1 className="text-center p-2">Recent Posts</h1>
               <Button outline gradientDuoTone="purpleToPink">
