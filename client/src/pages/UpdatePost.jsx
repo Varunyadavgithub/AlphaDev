@@ -110,6 +110,26 @@ const UpdatePost = () => {
       setPublishError("Something went wrong");
     }
   };
+
+  const modules = {
+    toolbar: {
+      container: [
+        [{ header: [] }, { font: [] }],
+        [{ list: "ordered" }, { list: "bullet" }],
+        ["bold", "italic", "underline"],
+        [{ color: [] }, { background: [] }],
+        ["link", "image"],
+        ["clean"],
+        ["code-block"],
+        [{ align: [] }],
+        [{ script: "sub" }, { script: "super" }],
+        [{ direction: "rtl" }],
+      ],
+      clipboard: {
+        matchVisual: false,
+      },
+    },
+  };
   return (
     <>
       <div className="p-3 max-w-3xl mx-auto min-h-screen">
@@ -184,6 +204,20 @@ const UpdatePost = () => {
             onChange={(value) => {
               setFormData({ ...formData, content: value });
             }}
+            modules={modules}
+            formats={[
+              "header",
+              "font",
+              "list",
+              "bold",
+              "italic",
+              "underline",
+              "color",
+              "background",
+              "link",
+              "image",
+              "code-block",
+            ]}
           />
           <Button type="submit" gradientDuoTone="purpleToBlue">
             Update post
