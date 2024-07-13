@@ -131,9 +131,14 @@ const Search = () => {
                 onChange={handleChange}
               >
                 <option value="uncategorized">Uncategorized</option>
-                <option value="reactjs">React.js</option>
-                <option value="nextjs">Next.js</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
                 <option value="javascript">JavaScript</option>
+                <option value="react">React.js</option>
+                <option value="node">Node.js</option>
+                <option value="express">Express.js</option>
+                <option value="mongodb">MongoDB</option>
+                <option value="dsa">DSA</option>
               </Select>
             </div>
             <Button type="submit" outline gradientDuoTone="purpleToBlue">

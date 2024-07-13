@@ -106,10 +106,14 @@ const CreatePost = () => {
               }}
             >
               <option value="uncategorized">Select a category</option>
-              <option value="javaScript">JavaScript</option>
-              <option value="react">React.js</option>
-              <option value="dsa">DSA</option>
+              <option value="html">HTML</option>
               <option value="css">CSS</option>
+              <option value="javascript">JavaScript</option>
+              <option value="react">React.js</option>
+              <option value="node">Node.js</option>
+              <option value="express">Express.js</option>
+              <option value="mongodb">MongoDB</option>
+              <option value="dsa">DSA</option>
             </Select>
           </div>
           <div className="flex gap-3 items-center justify-between border-4 border-blue-500 border-dotted p-3">
