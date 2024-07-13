@@ -33,3 +33,11 @@ body{
 .dark .post-content a{
     color: red;
 }
+.post-content pre{
+    background: rgba(0, 0, 0, 0.876);
+    padding: 15px;
+    color: white;
+    border: 2px solid black;
+    border-radius: 20px;
+    overflow: scroll;
+}
