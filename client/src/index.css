@@ -41,3 +41,8 @@ body{
     border-radius: 20px;
     overflow: scroll;
 }
+@media (min-width: 1024px) {
+    .post-content pre {
+        overflow: visible; 
+    }
+}
