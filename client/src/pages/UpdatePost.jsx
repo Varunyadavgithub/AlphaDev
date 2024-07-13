@@ -19,7 +19,6 @@ const UpdatePost = () => {
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({});
-
   const [publishError, setPublishError] = useState(null);
   const navigate = useNavigate();
   const { postId } = useParams();
@@ -120,7 +119,7 @@ const UpdatePost = () => {
             <TextInput
               type="text"
               placeholder="Title"
-              requited
+              required
               id="title"
               className="flex-1"
               onChange={(e) => {
@@ -135,14 +134,11 @@ const UpdatePost = () => {
               value={formData.category}
             >
               <option value="uncategorized">Select a category</option>
-              <option value="html">HTML</option>
-              <option value="css">CSS</option>
-              <option value="javascript">JavaScript</option>
+              <option value="javaScript">JavaScript</option>
               <option value="react">React.js</option>
               <option value="node">Node.js</option>
-              <option value="express">Express.js</option>
-              <option value="mongodb">MongoDB</option>
               <option value="dsa">DSA</option>
+              <option value="css">CSS</option>
             </Select>
           </div>
           <div className="flex gap-3 items-center justify-between border-4 border-blue-500 border-dotted p-3">
@@ -184,7 +180,7 @@ const UpdatePost = () => {
             value={formData.content}
             placeholder="Write something..."
             className="h-72 mb-20"
-            requited
+            required
             onChange={(value) => {
               setFormData({ ...formData, content: value });
             }}

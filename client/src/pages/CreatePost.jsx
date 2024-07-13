@@ -93,7 +93,7 @@ const CreatePost = () => {
             <TextInput
               type="text"
               placeholder="Title"
-              requited
+              required
               id="title"
               className="flex-1"
               onChange={(e)=>{
@@ -156,7 +156,7 @@ const CreatePost = () => {
             theme="snow"
             placeholder="Write something..."
             className="h-72 mb-20"
-            requited
+            required
             onChange={
               (value)=>{
                 setFormData({...formData,content:value});
