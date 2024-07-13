@@ -71,15 +71,15 @@ const CommentSection = ({ postId }) => {
       if (res.ok) {
         const data = await res.json();
         setComments(
-          comments.map((comment) => {
+          comments.map((comment) =>
             comment._id === commentId
               ? {
                   ...comment,
                   likes: data.likes,
                   numberOfLikes: data.likes.length,
                 }
-              : comment;
-          })
+              : comment
+          )
         );
       }
     } catch (error) {
@@ -139,6 +139,7 @@ const CommentSection = ({ postId }) => {
             </Link>
           </div>
         )}
+
         {currentUser && (
           <form
             onSubmit={handleSubmit}
@@ -166,6 +167,7 @@ const CommentSection = ({ postId }) => {
             )}
           </form>
         )}
+
         {comments.length === 0 ? (
           <p className="text-sm my-5">No comments yet!</p>
         ) : (
@@ -176,9 +178,10 @@ const CommentSection = ({ postId }) => {
                 <p>{comments.length}</p>
               </div>
             </div>
-            {comments.map((comment, index) => (
+
+            {comments.map((comment) => (
               <Comment
-                key={index}
+                key={comment._id}
                 comment={comment}
                 onLike={handleLike}
                 onEdit={handleEdit}
