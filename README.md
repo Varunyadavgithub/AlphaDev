@@ -4,6 +4,8 @@ Welcome to **AlphaDev**, your ultimate destination for programming, coding, and 
 This dynamic MERN stack application combines the power of **React.js**, **Tailwind CSS**, **Redux Toolkit**,
 **MongoDB**, **JWT**, **Google OAuth**, and **Render** to create a seamless blogging experience.
 
+👁️ [Live link](https://alphadev.onrender.com)
+
 ## 🌟 Features
 
 - **Responsive Design**: Enjoy a beautifully crafted interface that adapts to any device, ensuring a delightful user experience.
